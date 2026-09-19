@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma Mahesh</title>
+
+    <style>
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fa;
+            color: #222;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 18px 20px;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+
+            margin: 0 25px;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #555;
+        }
+
+        nav a.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 30px;
+        }
+
+
+        /* =========================
+           TABS
+        ========================= */
+
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+
+        /* =========================
+           ABOUT / HERO
+        ========================= */
+
+        .hero {
+            padding: 50px 0 70px 0;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            font-size: 17px;
+            color: #444;
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        section h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            font-size: 19px;
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================
+           EDUCATION
+        ========================= */
+
+        .education-item {
+            margin-bottom: 30px;
+        }
+
+        .education-item .degree {
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+        .education-item .institution {
+            color: #555;
+        }
+
+        .education-item .year {
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           SKILLS
+        ========================= */
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: white;
+            padding: 22px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .skill-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .skill-box p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================
+           PROJECTS
+        ========================= */
+
+        .project {
+            background: white;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            padding: 30px;
+            margin-bottom: 25px;
+
+            transition: 0.2s;
+        }
+
+        .project:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+        }
+
+        .project h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+
+        /* =========================
+           CONTACT
+        ========================= */
+
+        .contact-card {
+            background: white;
+
+            border: 1px solid #ddd;
+            border-radius: 10px;
+
+            padding: 35px;
+        }
+
+        .contact-item {
+            margin-bottom: 20px;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            border-top: 1px solid #ddd;
+
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav a {
+                margin: 0 10px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav>
+
+    <a onclick="openTab('about')" id="aboutTab" class="active">
+        About
+    </a>
+
+    <a onclick="openTab('projects')" id="projectsTab">
+        Projects
+    </a>
+
+    <a onclick="openTab('contacts')" id="contactsTab">
+        Contacts
+    </a>
+
+</nav>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
+    <div id="about" class="tab active">
+
+        <div class="hero">
+
+            <h1>Uma Mahesh</h1>
+
+            <p>
+                PhD candidate at the Indian Institute of Technology Jammu,
+                working at the intersection of omics and artificial intelligence.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             EDUCATION
+        ========================= -->
+
+        <section>
+
+            <h2>Education</h2>
+
+
+            <div class="education-item">
+
+                <div class="degree">
+                    Doctor of Philosophy (PhD) in Biosciences and Bioengineering
+                </div>
+
+                <div class="institution">
+                    Indian Institute of Technology Jammu
+                </div>
+
+                <div class="year">
+                    2025 – Present
+                </div>
+
+                <p>
+                    Research: AI/ML Approaches to Develop
+                    Genomic-Feature–Based Predictive Models
+                    for Female Reproductive Health
+                </p>
+
+            </div>
+
+
+            <div class="education-item">
+
+                <div class="degree">
+                    Master of Technology (MTech) in Bioinformatics
+                </div>
+
+                <div class="institution">
+                    University of Hyderabad
+                </div>
+
+                <div class="year">
+                    2022 – 2024
+                </div>
+
+            </div>
+
+
+            <div class="education-item">
+
+                <div class="degree">
+                    Bachelor of Engineering (BE) in Biotechnology
+                </div>
+
+                <div class="institution">
+                    M S Ramaiah Institute of Technology
+                </div>
+
+                <div class="year">
+                    2016 – 2020
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SKILLS
+        ========================= -->
+
+        <section>
+
+            <h2>Skills</h2>
+
+            <div class="skills">
+
+
+                <div class="skill-box">
+
+                    <h3>Research Area</h3>
+
+                    <p>
+                        Cancer genomics, Female reproductive health and disorders
+                    </p>
+
+                </div>
+
+
+                <div class="skill-box">
+
+                    <h3>Omics</h3>
+
+                    <p>
+                        Genomics, Epigenomics, Transcriptomics
+                    </p>
+
+                </div>
+
+
+                <div class="skill-box">
+
+                    <h3>Computational Methods</h3>
+
+                    <p>
+                        Bulk-omics data analysis,Single-cell omics data analysis,
+                        AI-based omics data analysis, Bioinformatics tool development
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================
+         PROJECTS
+    ========================= -->
+
+    <div id="projects" class="tab">
+
+        <div class="hero">
+
+            <h1>Projects</h1>
+
+        </div>
+
+
+        <section>
+
+
+            <div class="project">
+
+                <h3>
+                    Identification of Differentially Expressed Genes
+                    Harboring SNVs Associated with Endometriosis
+                    Leading to Ovarian Cancer
+                </h3>
+
+            </div>
+
+
+            <div class="project">
+
+                <h3>
+                    Isolation and Screening of Plasmid DNA from
+                    Pseudomonas aeruginosa conferring the ability
+                    to degrade aromatic hydrocarbons including
+                    benzene and toluene
+                </h3>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <!-- =========================
+         CONTACTS
+    ========================= -->
+
+    <div id="contacts" class="tab">
+
+        <div class="hero">
+
+            <h1>Contacts</h1>
+
+            <p>
+                Get in touch regarding research,
+                collaborations and academic opportunities.
+            </p>
+
+        </div>
+
+
+        <section>
+
+            <div class="contact-card">
+
+
+                <div class="contact-item">
+
+                    <strong>Location</strong>
+
+                    Jammu, India
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>Email</strong>
+
+                    <a href="mailto:2025rbb1002@iitjammu.ac.in">
+                        2025rbb1002@iitjammu.ac.in
+                    </a>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>LinkedIn</strong>
+
+                    <a href="https://www.linkedin.com/in/uma-mahesh-512704270"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        uma-mahesh-512704270
+                    </a>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <strong>GitHub</strong>
+
+                    <a href="https://github.com/UmaMahesh1002"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        UmaMahesh1002
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 Uma Mahesh
+
+</footer>
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+function openTab(tabName) {
+
+    const tabs = document.querySelectorAll(".tab");
+
+    tabs.forEach(function(tab) {
+        tab.classList.remove("active");
+    });
+
+
+    const navLinks = document.querySelectorAll("nav a");
+
+    navLinks.forEach(function(link) {
+        link.classList.remove("active");
+    });
+
+
+    document.getElementById(tabName).classList.add("active");
+
+    document.getElementById(tabName + "Tab")
+        .classList.add("active");
+
+}
+
+</script>
+
+
+</body>
+
+</html>
